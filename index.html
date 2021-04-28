@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QR Generator - by Md Mijanur Rahaman</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="style.css">
+    <script src="VanillaQR.js"></script>
+</head>
+<body>
+
+
+
+<div class="container">
+    <h1 title="QR Code Generator only for url">QR Code Generator</h1>
+    <div class="inputer">
+        <input class="inputurl" id="qrUrl" type="text" value="https://facebook.com/mdmijanurrahaman.mr" placeholder="URL/link">
+        <input type="color"  id="color1"><input type="color" id="color2">
+</div>
+
+<div class="div">
+       
+<div class="mydiv">
+    <p>Ecclevel
+        <select id="ecclevel">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+    </p>
+    <button onclick="createQR();">Create QR</button>
+</div>
+<div class="mydiv">
+    Type : <select id="imageTypeSelector"></select> <button  id="canvasImageSave">Export</button>
+    <a href="#" class="button" id="btn-download">Download</a>
+
+    <!-- onclick="exportImage()" -->
+</div>
+</div>
+    <!-- <div class="credit">Created by <a href="https://www.facebook.com/mdmijanurrahaman.mr">Md Mijanur Rahaman</a>. Powerd by <a href="https://www.mrlaboratory.com">MR Laboratory</a>.</div> -->
+
+</div>
+    
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+    window.onload = function() {
+        setupImageTypes();
+        $("#color1").val("#ffffff");
+        $("#color2").val("#000000");
+    }
+
+    var qr = new VanillaQR({
+        url: "https://facebook.com/mdmijanurrahaman.mr",
+        size: 400,
+        colorLight: "white",
+        colorDark: "black"
+    });
+    document.body.appendChild(qr.domElement);
+
+    //Create qr controllers
+    var ecclevel = document.getElementById("ecclevel");
+    var imageTypeSelector = document.getElementById("imageTypeSelector");
+    function createQR() {
+        qr.url = qrUrl.value;
+        qr.colorLight = $("#color1").val();
+        qr.colorDark = $("#color2").val();
+        qr.ecclevel = ecclevel.value;
+        qr.init();
+
+    }
+    function setupImageTypes() {
+
+        var optionTag = document.createElement("option");
+        for( var type in qr.imageTypes) {
+
+            var typeOption = optionTag.cloneNode();
+
+            typeOption.value = type;
+            typeOption.innerHTML = type;
+
+            imageTypeSelector.appendChild(typeOption);
+        }
+
+    }
+    function exportImage() {
+
+        // var imageType = imageTypeSelector.options[ imageTypeSelector.selectedIndex ].value;
+        // var image = qr.toImage(imageType);
+
+        // window.open(image.src);
+        const canvas = $("canvas");
+    var dataURL = canvas.toDataURL('image/png');
+    button.href = dataURL;
+
+}
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
