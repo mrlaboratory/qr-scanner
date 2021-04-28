@@ -1,0 +1,9 @@
+    function createQR() {
+        var nurl = "https://www.mrlaboratory.info/p/redirect.html?url="+qrUrl.value+"/?ref=https://www.mrlaboratory.info/";
+        qr.url = nurl;
+        qr.colorLight = $("#color1").val();
+        qr.colorDark = $("#color2").val();
+        qr.ecclevel = ecclevel.value;
+        qr.init();
+
+    }
